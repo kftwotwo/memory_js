@@ -21,17 +21,28 @@ gulp.task('jsBrowserify', ['concatScripts'], function() {
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./build/js'))
-})
+});
 
 // minifyScripts (for production)
 gulp.task('minifyScripts', ['jsBrowserify'], function() {
   return gulp.src(['./build/js/app.js'])
     .pipe(uglify())
     .pipe(gulp.dest('./build/js'))
-})
-// clean
-// build
+});
 
-// stream
+// clean
+gulp.task('clean', function() {
+  return del(['build', 'clean'])
+});
+
+// build
+gulp.task('build', ['clean'], function() {
+  if (buildProduction) {
+    gulp.start(minifyScripts);
+  } else {
+    gulp.start(jsBrowserify);
+  }
+});
 
 // jshint
+// stream
