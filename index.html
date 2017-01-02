@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Memory Game</title>
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css"> -->
+    <link href="/bower_components/material-icons/css/material-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bower_components/materialize/bin/materialize.css">
+  </head>
+  <body>
+    <div class="container">
+      <form id="new-entry-form">
+        <label for="title">Entry Title:</label>
+        <input id="title" type="text">
+        <label for="body">Entry Body:</label>
+        <textarea id="body"></textarea>
+        <button type="submit" class="btn cyan">Submit</button>
+      </form>
+      <div id="journal"></div>
+    </div>
+
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/materialize/bin/materialize.js"></script>
+    <script src="/build/js/app.js"></script>
+  </body>
+</html>
