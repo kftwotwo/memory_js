@@ -38,11 +38,20 @@ gulp.task('clean', function() {
 // build
 gulp.task('build', ['clean'], function() {
   if (buildProduction) {
-    gulp.start(minifyScripts);
+    gulp.start('minifyScripts');
   } else {
-    gulp.start(jsBrowserify);
+    gulp.start('jsBrowserify');
   }
 });
 
 // jshint
+gulp.task('jshint', function() {
+  return gulp.src(['js/*.js'])
+  .pipe(jshint())
+  .pipe(jshint.reporter('default'));
+});
+
 // stream
+gulp.task('stream', ['build'], function() {
+  return gulp.watch('js/**/*.js', ['build'])
+})
