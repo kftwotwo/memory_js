@@ -20,6 +20,7 @@ exports.Card = Card;
 // purple:  bomb
 
 var Card = require('./../js/memory.js').Card;
+var guesses, cards;
 
 function getRandomCards(numPairs) {
   var cards = [];
@@ -33,18 +34,13 @@ function getRandomCards(numPairs) {
   return cards;
 }
 
-
-function guess(symbol) {
-  console.log(symbol);
-}
-
 $(document).ready(function() {
-  var guesses = [];
-  var cards = getRandomCards(6);
+  guesses = [];
+  cards = getRandomCards(6);
   for(var i=0; i<cards.length; i++) {
     var card = cards[i];
     $('#game-board').append(`
-      <div class="card game-card ${card.cardColor}" meta-symbol="${card.symbol}">
+      <div class="card game-card ${card.cardColor} face-down" meta-symbol="${card.symbol}">
         <div class="card-content">
           <i class="fa fa-${card.symbol}"></i>
         </div>
@@ -55,7 +51,16 @@ $(document).ready(function() {
 
 $('body').on('click', '.game-card', function(event) {
   event.preventDefault();
-  console.log(event.target.closest('.game-card').getAttribute('meta-symbol'));
+  var $card = $(event.target.closest('.game-card'));
+  $card.toggleClass('face-down');
+  var symbol = $card.attr('meta-symbol');
+  if(guesses.indexOf(symbol) < 0) {
+    guesses.push(symbol);
+  } else {
+    console.log("YOU WIN");
+  }
+  console.log(guesses);
+
 })
 
 },{"./../js/memory.js":1}]},{},[2]);
